@@ -25,14 +25,15 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114">
-        <schema name="main" object-types="view, table" />
+        <schema name="main" object-types="column, dataset trigger, table, view, constraint, index" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="3a2a5940-dbbe-48b0-8853-9334735ce114">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">select * from student
-select * from class</console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from student
+select * from class
+select * from user]]></console>
     </connection>
     <connection id="b2ddec4e-12fe-4525-8ded-2e375f91d98b">
       <console name="Connection 1" type="STANDARD" schema="" session="Main" />
@@ -51,6 +52,12 @@ select * from class</console>
         <condition column="sid" operator="&gt;=" value="0" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.class" active-filter-id="1f8f4d6e-9fb0-49f4-b61b-d9c6d5afca18">
+      <filter id="1f8f4d6e-9fb0-49f4-b61b-d9c6d5afca18" name="1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="classid" operator="&gt;=" value="1" active="true" />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.user" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

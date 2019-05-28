@@ -5,27 +5,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".managerOperation.AddClassActivity">
+        tools:context=".managerOperation.DeleteSubjectActivity">
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="添加班级"
+            android:text="删除科目"
             android:textSize="30dp"
             android:textColor="#000"
             android:layout_gravity="center_horizontal"
     />
     <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
     >
-
-        <EditText
-                android:id="@+id/classname"
-                android:layout_width="200dp"
+        <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="新增班级名:"
+                android:text="科目id:"
+                android:textSize="30dp"
+        />
+        <Spinner
+                android:id="@+id/classes"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
         />
     </LinearLayout>
 
@@ -36,15 +40,15 @@
             android:orientation="horizontal"
     >
         <Button
-                android:id="@+id/add_yes"
+                android:id="@+id/yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="80dp"
-                android:text="添加"
+                android:text="确定"
         />
         <Button
-                android:id="@+id/add_no"
+                android:id="@+id/no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

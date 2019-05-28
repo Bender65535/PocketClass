@@ -11,15 +11,14 @@ import com.example.pocketclass.Manager;
 import com.example.pocketclass.R;
 import com.sql.SQLiteOperation;
 
-public class AddClassActivity extends AppCompatActivity {
+public class AddSubjectActivity extends AppCompatActivity {
     Button btYes;
     Button btNo;
     EditText ed;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_class);
+        setContentView(R.layout.activity_add_subject);
 
         btYes=(Button)findViewById(R.id.add_yes);
         btNo=(Button)findViewById(R.id.add_no);
@@ -28,19 +27,18 @@ public class AddClassActivity extends AppCompatActivity {
         btYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String className=ed.getText().toString();
+                String subjectName=ed.getText().toString();
 
-                long result=SQLiteOperation.addClass(getBaseContext(),className);
+                long result=SQLiteOperation.addSubject(getBaseContext(),subjectName);
                 if(result>0){
-                    Toast.makeText(AddClassActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddSubjectActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         btNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(AddClassActivity.this, Manager.class);
+                Intent intent=new Intent(AddSubjectActivity.this, Manager.class);
                 startActivity(intent);
             }
         });

@@ -9,6 +9,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".managerOperation.DeleteStudent">
+        </activity>
+        <activity android:name=".managerOperation.DeleteTeacher">
+        </activity>
+        <activity android:name=".managerOperation.DeleteSubjectActivity">
+        </activity>
+        <activity android:name=".managerOperation.AddSubjectActivity">
+        </activity>
+        <activity android:name=".DialogActivity">
+        </activity>
         <activity android:name=".managerOperation.DeleteClassActivity">
         </activity>
         <activity android:name=".managerOperation.AddClassActivity">

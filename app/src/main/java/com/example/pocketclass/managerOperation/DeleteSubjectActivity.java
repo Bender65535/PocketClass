@@ -14,20 +14,21 @@ import com.example.pocketclass.Manager;
 import com.example.pocketclass.R;
 import com.sql.SQLiteOperation;
 
-public class DeleteClassActivity extends AppCompatActivity {
+public class DeleteSubjectActivity extends AppCompatActivity {
+
     Button btYes;
     Button btNo;
 
 
-    Spinner classSpinner;
-    ArrayAdapter<String> classAdapt;
+    Spinner subjectSpinner;
+    ArrayAdapter<String> subjectAdapt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_class);
+        setContentView(R.layout.activity_delete_subject);
         btYes=(Button)findViewById(R.id.yes);
         btNo=(Button)findViewById(R.id.no);
-        classSpinner=(Spinner)findViewById(R.id.classes);
+        subjectSpinner =(Spinner)findViewById(R.id.classes);
 
 
         setSpinner();
@@ -36,52 +37,53 @@ public class DeleteClassActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //对话框
-                AlertDialog.Builder builder=new AlertDialog.Builder(DeleteClassActivity.this);
+                AlertDialog.Builder builder=new AlertDialog.Builder(DeleteSubjectActivity.this);
                 builder.setTitle("提示")
                         .setMessage("确认删除?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String classid=classSpinner.getSelectedItem().toString();
-                                int result =SQLiteOperation.deleteClass(getBaseContext(),"classid=?",new String[]{classid});
+                                String subjectid= subjectSpinner.getSelectedItem().toString();
+                                int result =SQLiteOperation.deleteSubject(getBaseContext(),"subjectid=?",new String[]{subjectid});
                                 if(result>0){
-                                    Toast.makeText(DeleteClassActivity.this,"删除成功",Toast.LENGTH_SHORT);
+                                    Toast.makeText(DeleteSubjectActivity.this,"删除成功",Toast.LENGTH_SHORT);
                                     try {
                                         Thread.sleep(500);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
-                                    Intent intent=new Intent(DeleteClassActivity.this, Manager.class);
+                                    Intent intent=new Intent(DeleteSubjectActivity.this, Manager.class);
                                     startActivity(intent);
                                 }else {
-                                    Toast.makeText(DeleteClassActivity.this,"删除失败",Toast.LENGTH_SHORT);
+                                    Toast.makeText(DeleteSubjectActivity.this,"删除失败",Toast.LENGTH_SHORT);
 
                                 }
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                }).show();
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).show();
             }
         });
 
         btNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(DeleteClassActivity.this, Manager.class);
+                Intent intent=new Intent(DeleteSubjectActivity.this, Manager.class);
                 startActivity(intent);
 
             }
         });
     }
 
+
     private void setSpinner() {
-        classSpinner=(Spinner)findViewById(R.id.classes);
-        String[] classes = SQLiteOperation.queryAllClass(getBaseContext());
-        classAdapt=new ArrayAdapter(DeleteClassActivity.this,R.layout.support_simple_spinner_dropdown_item,classes);
-        classSpinner.setAdapter(classAdapt);
+        subjectSpinner =(Spinner)findViewById(R.id.classes);
+        String[] classes = SQLiteOperation.queryAllSubjects(getBaseContext());
+        subjectAdapt =new ArrayAdapter(DeleteSubjectActivity.this,R.layout.support_simple_spinner_dropdown_item,classes);
+        subjectSpinner.setAdapter(subjectAdapt);
     }
 }

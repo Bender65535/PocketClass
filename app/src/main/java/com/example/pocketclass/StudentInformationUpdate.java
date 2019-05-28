@@ -143,9 +143,6 @@ public class StudentInformationUpdate extends AppCompatActivity {
                 areaString = areaSpinner.getSelectedItem().toString();
                 area = provinceString + "," + cityString + "," + areaString;
 
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                image = baos.toByteArray();
 
                 ContentValues values = new ContentValues();
                 values.put("name", name);
@@ -154,7 +151,12 @@ public class StudentInformationUpdate extends AppCompatActivity {
                 values.put("email", email);
                 values.put("phone", phone);
                 values.put("area", area);
-                values.put("image", image);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                if(bitmap!=null){
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                    image = baos.toByteArray();
+                    values.put("image", image);
+                }
                 values.put("classid", classid);
 
                 SQLiteOperation.updateStudent(StudentActivity.context, values, "uname=?", new String[]{StudentActivity.uname});
