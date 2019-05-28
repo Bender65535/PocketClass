@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".StudentInformationUpdate">
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:background="#F3F3F3"
+                android:orientation="vertical">
+
+
+            <FrameLayout
+                    android:layout_width="365dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="#fff"
+
+            >
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="头像"/>
+
+                <ImageButton
+                        android:id="@+id/bt_btcamera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#fff"
+                        android:src="@drawable/add"/>
+
+                <ImageButton
+                        android:id="@+id/bt_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="#0fff"/>
+
+            </FrameLayout>
+
+
+            <TableLayout
+                    android:layout_width="362dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="#fff">
+
+                <TableRow>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="基本信息"
+
+                    />
+
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+
+                >
+
+
+                    <EditText
+                            android:id="@+id/ed_base_information"
+                            android:layout_width="300dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/tx"
+                            android:drawableRight="@drawable/person"
+                            android:textColor="#fff"/>
+
+                </TableRow>
+
+
+                <TableRow
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp">
+
+                    <EditText
+                            android:id="@+id/ed_date"
+                            android:layout_width="350dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/tx"
+                            android:drawableRight="@drawable/date"
+                            android:textColor="#fff"
+
+                    />
+
+
+                </TableRow>
+
+                <TableRow android:layout_marginTop="10dp">
+
+                    <TextView
+                            android:layout_marginLeft="10dp"
+                            android:text="性别"/>
+
+                </TableRow>
+
+                <TableRow android:layout_marginTop="10dp">
+
+                    <RadioGroup
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                        <RadioButton
+                                android:id="@+id/rd_man"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="男"
+
+                        />
+
+                        <RadioButton
+                                android:id="@+id/rd_woman"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:text="女"/>
+                    </RadioGroup>
+                </TableRow>
+                <TableRow android:layout_marginTop="10dp">
+                    <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:orientation="vertical"
+                    >
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="地区:"
+                        />
+
+                        <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                        >
+                            <Spinner
+                                    android:id="@+id/province"
+                                    android:layout_width="120dp" android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+
+                            >
+                            </Spinner>
+                            <Spinner
+                                    android:id="@+id/city"
+                                    android:layout_width="120dp" android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                            >
+                            </Spinner>
+                            <Spinner
+                                    android:id="@+id/area"
+                                    android:layout_width="120dp" android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+
+                            >
+                            </Spinner>
+                        </LinearLayout>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="班级:"
+                        />
+                        <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                        >
+                            <Spinner
+                                    android:id="@+id/classid"
+                                    android:layout_width="120dp" android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+
+                            >
+                            </Spinner>
+                        </LinearLayout>
+                    </LinearLayout>
+                </TableRow>
+
+
+            </TableLayout>
+
+
+            <LinearLayout
+                    android:layout_width="369dp"
+                    android:layout_height="105dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="联系方式"
+
+                />
+
+                <EditText
+                        android:id="@+id/ed_email"
+                        android:layout_width="340dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/tx"
+                        android:drawableRight="@drawable/message"
+                        android:textColor="#fff"
+
+                />
+
+                <EditText
+                        android:id="@+id/ed_phone"
+                        android:layout_width="340dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/tx"
+                        android:drawableRight="@drawable/phone"
+                        android:textColor="#fff"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="0dp">
+
+                <ImageButton
+                        android:id="@+id/bt_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#8B0000"
+                        android:src="@drawable/save"
+
+                />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
