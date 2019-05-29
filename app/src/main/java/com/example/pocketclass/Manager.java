@@ -15,6 +15,8 @@ public class Manager extends AppCompatActivity {
 
     ImageButton deleteStudent;
     ImageButton deleteTeacher;
+
+    ImageButton addTeacherToClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,8 @@ public class Manager extends AppCompatActivity {
 
         deleteStudent=(ImageButton)findViewById(R.id.delete_student);
         deleteTeacher=(ImageButton)findViewById(R.id.delete_teacher);
+
+        addTeacherToClass=(ImageButton)findViewById(R.id.add_teacher_to_class);
 
         addClass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +74,14 @@ public class Manager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Manager.this, DeleteTeacher.class);
+                startActivity(intent);
+            }
+        });
+
+        addTeacherToClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Manager.this, AddTeacherToClass.class);
                 startActivity(intent);
             }
         });

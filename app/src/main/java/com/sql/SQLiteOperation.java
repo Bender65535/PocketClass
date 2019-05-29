@@ -68,6 +68,16 @@ public class SQLiteOperation {
         db.close();
         return result;
     }
+    //增加任课
+    public static long addTeach(Context context,int teacherid,int classid){
+        SQLiteDatabase db = getDataBase(context);
+        ContentValues values = new ContentValues();
+        values.put("classid",classid);
+        values.put("teacherid",teacherid);
+        long result=db.insert("teach",null,values);
+        db.close();
+        return result;
+    }
     /**
      * 删
      */

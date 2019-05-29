@@ -43,7 +43,7 @@ public class DeleteStudent extends AppCompatActivity {
 
                                 String studentName=studentSpinner.getSelectedItem().toString();
                                 //分割spinner的字符串
-                                int id=Integer.parseInt(studentName.split(" ")[1]);
+                                int id=Integer.parseInt(studentName.split(" ")[0]);
 
                                 int result =SQLiteOperation.deleteStudentById(getBaseContext(),id);
                                 if(result>0){

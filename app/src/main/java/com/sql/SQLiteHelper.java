@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
     public SQLiteHelper(Context context) {
-        super(context, "pocket_class", null, 5);
+        super(context, "pocket_class", null, 7);
     }
 
     @Override
@@ -57,8 +57,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //考勤表
         db.execSQL("create table attendance(" +
                 "attendid integer primary key autoincrement," +
-                "date varchar(40)," +
-                "state varchar(20)," +
                 "sid integer," +
                 "tid integer," +
                 "FOREIGN KEY(sid) REFERENCES student(sid)," +
@@ -68,9 +66,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "hid integer primary key autoincrement," +
                 "sid integer," +
                 "tid integer," +
-                "overall varchar(30)," +
+                "score integer," +
                 "subject varchar(20)," +
-                "date varchar(40));");
+                "FOREIGN KEY(sid) REFERENCES student(sid)," +
+                "FOREIGN KEY(tid) REFERENCES teacher(tid));");
         //班级表
         db.execSQL("create table class(" +
                 "classid integer primary key autoincrement," +
@@ -83,6 +82,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "tid integer," +
                 "FOREIGN KEY(classid) REFERENCES class(classid)," +
                 "FOREIGN KEY(tid) REFERENCES teacher(tid));");
+
         //科目表
         db.execSQL("create table subject(" +
                 "subjectid integer primary key autoincrement," +

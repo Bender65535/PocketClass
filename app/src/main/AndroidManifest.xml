@@ -9,6 +9,22 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".teacherOperation.ManagerHomeWork">
+        </activity>
+        <activity android:name=".teacherOperation.ClassAppraise">
+        </activity>
+        <activity android:name=".teacherOperation.ManagerAttendance">
+        </activity>
+        <activity android:name=".studentOperation.CalculateDatetimeScore">
+        </activity>
+        <activity android:name=".studentOperation.QueryHomeWork">
+        </activity>
+        <activity android:name=".studentOperation.QueryAppraise">
+        </activity>
+        <activity android:name=".studentOperation.QuerryAttendance">
+        </activity>
+        <activity android:name=".managerOperation.AddTeacherToClass">
+        </activity>
         <activity android:name=".managerOperation.DeleteStudent">
         </activity>
         <activity android:name=".managerOperation.DeleteTeacher">
