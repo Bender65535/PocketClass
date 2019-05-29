@@ -44,6 +44,7 @@ public class DeleteClassActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 String classid=classSpinner.getSelectedItem().toString();
                                 int result =SQLiteOperation.deleteClass(getBaseContext(),"classid=?",new String[]{classid});
+
                                 if(result>0){
                                     Toast.makeText(DeleteClassActivity.this,"删除成功",Toast.LENGTH_SHORT);
                                     try {

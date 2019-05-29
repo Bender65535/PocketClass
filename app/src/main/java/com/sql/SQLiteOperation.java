@@ -78,6 +78,16 @@ public class SQLiteOperation {
         db.close();
         return result;
     }
+    //增加出勤
+    public static long addAttendance(Context context,int tid,int sid){
+        SQLiteDatabase db = getDataBase(context);
+        ContentValues values = new ContentValues();
+        values.put("tid",tid);
+        values.put("sid",sid);
+        long result=db.insert("attendance",null,values);
+        db.close();
+        return result;
+    }
     /**
      * 删
      */
@@ -248,6 +258,16 @@ public class SQLiteOperation {
         db.close();
         return teacher;
     }
+    //根据账户名查老师id
+    public static int queryTeacherIdByUname(Context context,String uname){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select tid from teacher where uname=?",new String[]{uname});
+        cursor.moveToNext();
+        int id=cursor.getInt(cursor.getColumnIndex("tid"));
+        cursor.close();
+        db.close();
+        return id;
+    }
 
     //查询所有班级名
     public static String[] queryAllClass(Context context){
@@ -365,5 +385,21 @@ public class SQLiteOperation {
         cursor.close();
         db.close();
         return classId;
+    }
+    //按班级名查找所有学生id
+    public static int[] queryAllStudentIdByClassName(Context context,String className){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select sid from student,class where student.cid=class.cid and classname=?",new String[]{className});
+        cursor.moveToNext();
+        int classId=cursor.getInt(cursor.getColumnIndex("sid"));
+        int[] studentId=new int[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            cursor.moveToNext();
+            studentId[i]=cursor.getInt(cursor.getColumnIndex("sid"));
+        }
+
+        cursor.close();
+        db.close();
+        return null;
     }
 }
