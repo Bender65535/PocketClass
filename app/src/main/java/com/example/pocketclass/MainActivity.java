@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.sql.SQLiteOperation;
+import com.xml.Utils;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText et_uname;
     private EditText et_password;
     private TextView tv_register;
+    private CheckBox save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         et_uname = (EditText) findViewById(R.id.uname);
         et_password = (EditText) findViewById(R.id.password);
         tv_register=(TextView) findViewById(R.id.register);
+        save=(CheckBox)findViewById(R.id.save) ;
+
+        Map<String, String> userInfo = Utils.getUserInfo(this);
+        if (userInfo != null) {
+            et_uname.setText(userInfo.get("number"));
+            et_password.setText(userInfo.get("password"));
+        }
 
         //登录按钮
         bt.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +66,17 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 if (result) {
                     Toast.makeText(MainActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    //                    如果选择记住密码
+                    if(save.isChecked()){
+                        boolean isSaveSuccess=Utils.saveUserInfo(MainActivity.this,uname,pwd);
+                        if(isSaveSuccess){
+                            Toast.makeText(MainActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this,"保存失败",Toast.LENGTH_SHORT);
+                        }
+                    }
                     if("student".equals(SQLiteOperation.unameToPosition(getBaseContext(),uname))) {
 
                         intent = new Intent(MainActivity.this, StudentActivity.class);

@@ -44,7 +44,7 @@ public class DeleteSubjectActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String subjectid= subjectSpinner.getSelectedItem().toString();
-                                int result =SQLiteOperation.deleteSubject(getBaseContext(),"subjectid=?",new String[]{subjectid});
+                                int result =SQLiteOperation.deleteSubject(getBaseContext(),Integer.parseInt(subjectid));
                                 if(result>0){
                                     Toast.makeText(DeleteSubjectActivity.this,"删除成功",Toast.LENGTH_SHORT);
                                     try {

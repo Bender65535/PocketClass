@@ -118,24 +118,39 @@ public class SQLiteOperation {
     /**
      * 删
      */
-    public static int deleteData(Context context, String whereClause, String[] whereArgs) {
+    //删除班级
+    public static int deleteClass(Context context, int classid){
         SQLiteDatabase db = getDataBase(context);
-        int count = db.delete("students", whereClause, whereArgs);
+        int count = db.delete("class", "classid=?", new String[]{classid+""});
+        //删除班级id的所有任课
+        deleteTeachByClassid(context,classid);
+        //将学生表的classid制为null
+        updateStudentClassidToNull(context,classid);
         db.close();
         return count;
     }
-    //删除班级
-    public static int deleteClass(Context context,String whereClause, String[] whereArgs){
+    //删除班级id的所有任课
+    public static int deleteTeachByClassid(Context context,int classid){
         SQLiteDatabase db = getDataBase(context);
-        int count = db.delete("class", whereClause, whereArgs);
+        int count=db.delete("teach","classid=?",new String[]{classid+""});
         db.close();
         return count;
     }
     //删除科目
-    public static int deleteSubject(Context context,String whereClause, String[] whereArgs){
+    public static int deleteSubject(Context context, int subjectid){
         SQLiteDatabase db = getDataBase(context);
-        int count = db.delete("subject", whereClause, whereArgs);
+        int count = db.delete("subject", "subjectid=?", new String[]{subjectid+""});
+        //删除所有该科目id的作业表
+
+        //将老师的科目制为空
+        updateTeacherSubjectIdToNull(context,subjectid);
         db.close();
+        return count;
+    }
+    //删除所有该科目id的作业表
+    public static int deleteHomeworkBySubjectId(Context context, int subjectid){
+        SQLiteDatabase db = getDataBase(context);
+        int count = db.delete("homework", "subjectid=?", new String[]{subjectid+""});
         return count;
     }
     //通过id删除学生
@@ -143,37 +158,74 @@ public class SQLiteOperation {
         SQLiteDatabase db = getDataBase(context);
         int count = db.delete("student", "sid=?", new String[]{id+""});
 
-        //删除所在出勤表
-        //删除所在作业成绩表
-        //删除所在课堂评价表
-
+        //删除学生id所在出勤表
+        deleteStudentIdInAttendance(context,id);
+        //删除学生id所在作业成绩表
+        deleteStudentIdInHomework(context,id);
+        //删除学生id所在课堂评价表
+        deleteStudentIdInAppraise(context,id);
 
         db.close();
         return count;
     }
+
+    //删除学生id所在出勤表
+    public static int deleteStudentIdInAttendance(Context context,int sid){
+        SQLiteDatabase db = getDataBase(context);
+        int count = db.delete("attendance", "sid=?", new String[]{sid+""});
+        return count;
+    }
+    //删除学生id所在作业成绩表
+    public static int deleteStudentIdInHomework(Context context,int sid){
+        SQLiteDatabase db = getDataBase(context);
+        int count = db.delete("homework", "sid=?", new String[]{sid+""});
+        return count;
+    }
+    //删除学生id所在课堂评价表
+    public static int deleteStudentIdInAppraise(Context context,int sid){
+        SQLiteDatabase db = getDataBase(context);
+        int count = db.delete("appraise", "sid=?", new String[]{sid+""});
+        return count;
+    }
+
+
+
     //通过id删除老师
     public static int deleteTeacherById(Context context,int id){
         SQLiteDatabase db = getDataBase(context);
         int count = db.delete("teacher", "tid=?", new String[]{id+""});
 
-        //删除所在出勤表
-        //删除所在作业成绩表
-        //删除所在课堂评价表
-
+        //删除老师id所在出勤表
+        deleteTeacherIdInAttendance(context,id);
+        //删除老师id所在作业成绩表
+        deleteTeacherIdInHomework(context,id);
+        //删除老师id所在课堂评价表
+        deleteTeacherIdInAppraise(context,id);
 
         db.close();
         return count;
     }
-
+    //删除老师id所在出勤表
+    public static int deleteTeacherIdInAttendance(Context context,int tid){
+        SQLiteDatabase db = getDataBase(context);
+        int count = db.delete("attendance", "tid=?", new String[]{tid+""});
+        return count;
+    }
+    //删除老师id所在作业成绩表
+    public static int deleteTeacherIdInHomework(Context context,int tid){
+        SQLiteDatabase db = getDataBase(context);
+        int count = db.delete("homework", "tid=?", new String[]{tid+""});
+        return count;
+    }
+    //删除老师id所在课堂评价表
+    public static int deleteTeacherIdInAppraise(Context context,int tid){
+        SQLiteDatabase db = getDataBase(context);
+        int count = db.delete("appraise", "tid=?", new String[]{tid+""});
+        return count;
+    }
     /**
      * 改
      */
-    public static int updateData(Context context, ContentValues values, String whereClause, String[] whereArgs) {
-        SQLiteDatabase db = getDataBase(context);
-        int count = db.update("student", values, whereClause, whereArgs);
-        db.close();
-        return count;
-    }
 
     //添加学生资料
     public static void updateStudent(Context context, ContentValues values,String whereClause,String[] whereArgs) {
@@ -189,7 +241,23 @@ public class SQLiteOperation {
         db.close();
     }
 
+    //将学生的classid制为空
+    public static void updateStudentClassidToNull(Context context,int classid){
+        SQLiteDatabase db = getDataBase(context);
+        ContentValues values=new ContentValues();
+        values.put("classid","");
+        db.update("student", values, "classid", new String[]{classid+""});
+        db.close();
+    }
 
+    //将老师的科目制为空
+    public static void updateTeacherSubjectIdToNull(Context context,int subjectid){
+        SQLiteDatabase db = getDataBase(context);
+        ContentValues values=new ContentValues();
+        values.put("subjectid","");
+        db.update("subject", values, "subjectid", new String[]{subjectid+""});
+        db.close();
+    }
     /**
      * 查
      */
@@ -416,7 +484,7 @@ public class SQLiteOperation {
     //按班级名查找所有学生id
     public static int[] queryAllStudentIdByClassName(Context context,String className){
         SQLiteDatabase db = getDataBase(context);
-        Cursor cursor=db.rawQuery("select sid from student,class where student.cid=class.cid and classname=?",new String[]{className});
+        Cursor cursor=db.rawQuery("select sid from student,class where student.classid=class.classid and classname=?",new String[]{className});
         cursor.moveToNext();
         int classId=cursor.getInt(cursor.getColumnIndex("sid"));
         int[] studentId=new int[cursor.getCount()];
@@ -441,9 +509,9 @@ public class SQLiteOperation {
     }
 
     //根据班级查老师id
-    public static int[] queryTeacherByClassId(Context context,int cid){
+    public static int[] queryTeacherByClassId(Context context,int classid){
         SQLiteDatabase db = getDataBase(context);
-        Cursor cursor=db.rawQuery("select * from teach,teacher where classid=? and teach.tid=teacher.tid",new String[]{cid+""});
+        Cursor cursor=db.rawQuery("select * from teach,teacher where classid=? and teach.tid=teacher.tid",new String[]{classid+""});
 
         int[] tids=new int[cursor.getCount()];
         for(int i=0;i<cursor.getCount();i++){
@@ -460,10 +528,10 @@ public class SQLiteOperation {
         SQLiteDatabase db = getDataBase(context);
         Cursor cursor=db.rawQuery("select sid from student where uname=?",new String[]{uname});
         cursor.moveToNext();
-        int cid=cursor.getInt(cursor.getColumnIndex("sid"));
+        int classid=cursor.getInt(cursor.getColumnIndex("sid"));
         cursor.close();
         db.close();
-        return cid;
+        return classid;
     }
 
     //通过学生id,老师id查询缺勤次数

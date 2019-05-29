@@ -64,10 +64,13 @@
                 android:orientation="horizontal">
 
             <CheckBox
+                    android:id="@+id/save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="80dp"
-                    android:text="记住密码" />
+                    android:text="记住密码"
+                    android:checked="true"
+            />
 
             <TextView
                     android:id="@+id/register"

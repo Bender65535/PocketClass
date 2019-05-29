@@ -56,17 +56,6 @@ public class StudentInformation extends Fragment {
         String email = "";
         byte[] image;
 
-//        ContentValues values=new ContentValues();
-//        values.put("name",name);
-//        values.put("sex",sex);
-//        values.put("born",born);
-//        values.put("area",area);
-//        values.put("phone",phone);
-//        values.put("email",email);
-//        values.put("image",image);
-
-
-//        SQLiteOperation.updateStudent(StudentActivity.context,values,"uname=?",new String[]{uname});
 
         Student student = SQLiteOperation.queryStudent(context, uname);
 
