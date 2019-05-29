@@ -7,7 +7,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.*;
-import com.example.pocketclass.Manager;
 import com.example.pocketclass.R;
 import com.example.pocketclass.TeacherActivity;
 import com.sql.SQLiteOperation;
@@ -60,7 +59,7 @@ public class ManagerAttendance extends AppCompatActivity {
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
-                                    Intent intent=new Intent(ManagerAttendance.this, Manager.class);
+                                    Intent intent=new Intent(ManagerAttendance.this, TeacherActivity.class);
                                     startActivity(intent);
                                 }else {
                                     Toast.makeText(ManagerAttendance.this,"删除失败",Toast.LENGTH_SHORT);

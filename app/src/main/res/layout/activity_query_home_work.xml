@@ -24,11 +24,11 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="选择老师:"
+                android:text="选择科目:"
                 android:textSize="30dp"
         />
         <Spinner
-                android:id="@+id/teacher"
+                android:id="@+id/subject"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
         />

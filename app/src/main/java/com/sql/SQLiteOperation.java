@@ -88,6 +88,20 @@ public class SQLiteOperation {
         db.close();
         return result;
     }
+    //增加作业记录
+    public static long addHomework(Context context,int tid,int sid,int score){
+        SQLiteDatabase db = getDataBase(context);
+        ContentValues values = new ContentValues();
+        values.put("tid",tid);
+        values.put("sid",sid);
+        values.put("score",score);
+        //添加科目
+        int subjectid=querySubjectIdByTeacherId(context,tid);
+        values.put("subjectid",subjectid);
+        long result=db.insert("homework",null,values);
+        db.close();
+        return result;
+    }
     /**
      * 删
      */
@@ -401,5 +415,15 @@ public class SQLiteOperation {
         cursor.close();
         db.close();
         return null;
+    }
+    //根据老师id查科目id
+    public static int querySubjectIdByTeacherId(Context context,int teacherid){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select subjectid from teacher where tid=?",new String[]{teacherid+""});
+        cursor.moveToNext();
+        int subjectid=cursor.getInt(cursor.getColumnIndex("subjectid"));
+        cursor.close();
+        db.close();
+        return subjectid;
     }
 }
