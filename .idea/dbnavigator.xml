@@ -34,14 +34,18 @@
       <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select count(*) from student
 select * from class
 select * from user
-select * from teach inner join teacher on teach.tid=teacher.tid]]></console>
+select * from teach inner join teacher on teach.tid=teacher.tid
+select * from teach,teacher where classid=0 and teach.tid=teacher.tid]]></console>
     </connection>
     <connection id="b2ddec4e-12fe-4525-8ded-2e375f91d98b">
       <console name="Connection 1" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/teach" />
+      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/teacher" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="3a2a5940-dbbe-48b0-8853-9334735ce114" />

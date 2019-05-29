@@ -10,9 +10,47 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="平时成绩计算"
+            android:text="平时总分计算"
             android:textSize="30dp"
             android:textColor="#000"
             android:layout_gravity="center_horizontal"
     />
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择科目:"
+                android:textSize="30dp"
+        />
+        <Spinner
+                android:id="@+id/subject"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+        />
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总分: "
+        />
+        <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        />
+    </LinearLayout>
 </LinearLayout>

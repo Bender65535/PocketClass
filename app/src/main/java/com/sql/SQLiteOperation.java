@@ -443,7 +443,7 @@ public class SQLiteOperation {
     //根据班级查老师id
     public static int[] queryTeacherByClassId(Context context,int cid){
         SQLiteDatabase db = getDataBase(context);
-        Cursor cursor=db.rawQuery("select * from teach,teacher where cid=? and teach.tid=teacher.tid",new String[]{cid+""});
+        Cursor cursor=db.rawQuery("select * from teach,teacher where classid=? and teach.tid=teacher.tid",new String[]{cid+""});
 
         int[] tids=new int[cursor.getCount()];
         for(int i=0;i<cursor.getCount();i++){
@@ -458,9 +458,9 @@ public class SQLiteOperation {
     //根据学生uname查学生所在班级id
     public static int queryClassIdByUname(Context context,String uname){
         SQLiteDatabase db = getDataBase(context);
-        Cursor cursor=db.rawQuery("select cid from student where uname=?",new String[]{uname});
+        Cursor cursor=db.rawQuery("select sid from student where uname=?",new String[]{uname});
         cursor.moveToNext();
-        int cid=cursor.getInt(cursor.getColumnIndex("cid"));
+        int cid=cursor.getInt(cursor.getColumnIndex("sid"));
         cursor.close();
         db.close();
         return cid;

@@ -72,6 +72,6 @@ public class QueryHomeWork extends AppCompatActivity {
             subjects[i]=teacherid[i]+" "+teacherName+subjectName;
         }
         subjectAdapter=new ArrayAdapter(QueryHomeWork.this,R.layout.support_simple_spinner_dropdown_item,subjects);
-
+        subjectSpinner.setAdapter(subjectAdapter);
     }
 }
