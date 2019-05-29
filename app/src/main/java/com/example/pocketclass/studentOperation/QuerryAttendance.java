@@ -12,8 +12,8 @@ import com.sql.SQLiteOperation;
 public class QuerryAttendance extends AppCompatActivity {
 
     private Spinner teacherSpinner;
-    private TextView timesEditText;
-    private TextView scoreEditText;
+    private TextView timesText;
+    private TextView scoreText;
 
     ArrayAdapter<String> teacherAdapter;
 
@@ -34,8 +34,8 @@ public class QuerryAttendance extends AppCompatActivity {
         }
 
         teacherSpinner=(Spinner)findViewById(R.id.teacher);
-        timesEditText=(TextView)findViewById(R.id.times);
-        scoreEditText=(TextView)findViewById(R.id.score);
+        timesText =(TextView)findViewById(R.id.times);
+        scoreText =(TextView)findViewById(R.id.score);
 
         setSpinner();
 
@@ -52,9 +52,9 @@ public class QuerryAttendance extends AppCompatActivity {
                 int times=SQLiteOperation.queryTimesByStudentIdAndTeacherId(getBaseContext(),StudentActivity.studentid,tid);
 
                 //返回缺勤次数
-                timesEditText.setText(times);
+                timesText.setText(times);
                 //出勤分=100-10*times
-                scoreEditText.setText(100-10*times);
+                scoreText.setText(100-10*times);
             }
 
             @Override

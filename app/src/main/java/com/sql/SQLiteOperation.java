@@ -486,4 +486,24 @@ public class SQLiteOperation {
         db.close();
         return sid;
     }
+    //根据学生id,老师id查询老师给学生的评语
+    public static String queryWordsByStudentIdAndTeacherId(Context context,int studentId,int teacherId){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select words from appraise where sid=? and tid=?",new String[]{studentId+"",teacherId+""});
+        cursor.moveToNext();
+        String words=cursor.getString(cursor.getColumnIndex("words"));
+        cursor.close();
+        db.close();
+        return words;
+    }
+    //根据学生id,老师id查询老师给学生的课堂评分
+    public static int queryClassScoreByStudentIdAndTeacherId(Context context,int studentId,int teacherId){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select score from appraise where sid=? and tid=?",new String[]{studentId+"",teacherId+""});
+        cursor.moveToNext();
+        int score=cursor.getInt(cursor.getColumnIndex("score"));
+        cursor.close();
+        db.close();
+        return score;
+    }
 }
