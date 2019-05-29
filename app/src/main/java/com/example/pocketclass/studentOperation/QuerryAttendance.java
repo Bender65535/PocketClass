@@ -72,6 +72,7 @@ public class QuerryAttendance extends AppCompatActivity {
             teachers[i]=teacherid[i]+" "+SQLiteOperation.queryTeacherNameByid(getBaseContext(),teacherid[i]);
         }
         teacherAdapter=new ArrayAdapter(QuerryAttendance.this,R.layout.support_simple_spinner_dropdown_item,teachers);
+        teacherSpinner.setAdapter(teacherAdapter);
     }
 
 }

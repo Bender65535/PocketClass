@@ -506,4 +506,24 @@ public class SQLiteOperation {
         db.close();
         return score;
     }
+    //根据科目id查科目名
+    public static String querySubjectNameById(Context context,int subjectid){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select subjectname from subject where subjectid=?",new String[]{subjectid+""});
+        cursor.moveToNext();
+        String subjectname=cursor.getString(cursor.getColumnIndex("subjectname"));
+        cursor.close();
+        db.close();
+        return subjectname;
+    }
+    //根据学生id,老师id查询老师给学生的作业评分
+    public static int queryHomeworkScoreByStudentIdAndTeacherId(Context context,int studentId,int teacherId){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select score from homework where sid=? and tid=?",new String[]{studentId+"",teacherId+""});
+        cursor.moveToNext();
+        int score=cursor.getInt(cursor.getColumnIndex("score"));
+        cursor.close();
+        db.close();
+        return score;
+    }
 }
