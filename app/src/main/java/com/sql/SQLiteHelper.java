@@ -50,7 +50,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "aid integer primary key autoincrement," +
                 "sid integer," +
                 "tid integer," +
-                "word varchar(255)," +
+                "words varchar(255)," +
                 "score integer," +
                 "FOREIGN KEY(sid) REFERENCES student(sid)," +
                 "FOREIGN KEY(tid) REFERENCES teacher(tid));");

@@ -102,6 +102,19 @@ public class SQLiteOperation {
         db.close();
         return result;
     }
+    //增加课堂评价
+    public static long addAppraise(Context context,int tid,int sid,String words,int score){
+        SQLiteDatabase db = getDataBase(context);
+        ContentValues values = new ContentValues();
+        values.put("tid",tid);
+        values.put("sid",sid);
+        values.put("words",words);
+        values.put("score",score);
+        //添加科目
+        long result=db.insert("appraise",null,values);
+        db.close();
+        return result;
+    }
     /**
      * 删
      */
