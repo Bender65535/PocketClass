@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import com.sql.SQLiteOperation;
 
 public class StudentActivity extends AppCompatActivity {
 
@@ -19,6 +20,8 @@ public class StudentActivity extends AppCompatActivity {
 
     public static String uname;
     public static Context context;
+    public static int classid=0;
+    public static int studentid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,9 @@ public class StudentActivity extends AppCompatActivity {
 
         uname=bundle.getString("uname");
         context=getBaseContext();
+        classid= SQLiteOperation.queryClassIdByUname(getBaseContext(),uname);
+        studentid=SQLiteOperation.queryStudetIdByUname(getBaseContext(),uname);
+
         initFragment();
     }
     private void initFragment() {

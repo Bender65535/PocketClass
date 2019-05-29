@@ -25,15 +25,16 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114">
-        <schema name="main" object-types="view, table" />
+        <schema name="main" object-types="index, column, dataset trigger, table, constraint, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="3a2a5940-dbbe-48b0-8853-9334735ce114">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">select * from student
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select count(*) from student
 select * from class
-select * from user</console>
+select * from user
+select * from teach inner join teacher on teach.tid=teacher.tid]]></console>
     </connection>
     <connection id="b2ddec4e-12fe-4525-8ded-2e375f91d98b">
       <console name="Connection 1" type="STANDARD" schema="" session="Main" />
@@ -57,7 +58,17 @@ select * from user</console>
         <condition column="classid" operator="&gt;=" value="1" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.teacher" active-filter-id="1b4381bb-340a-4cca-ae09-3704234d7845">
+      <filter id="1b4381bb-340a-4cca-ae09-3704234d7845" name="0" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="tid" operator="=" value="0" active="true" />
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.user" active-filter-id="" />
+    <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.teach" active-filter-id="97bbc3a4-bcca-4577-a40a-7fee2726e0b4">
+      <filter id="97bbc3a4-bcca-4577-a40a-7fee2726e0b4" name="0" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="teachid" operator="&gt;=" value="0" active="true" />
+      </filter>
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

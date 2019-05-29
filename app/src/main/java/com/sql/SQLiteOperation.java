@@ -427,7 +427,7 @@ public class SQLiteOperation {
 
         cursor.close();
         db.close();
-        return null;
+        return studentId;
     }
     //根据老师id查科目id
     public static int querySubjectIdByTeacherId(Context context,int teacherid){
@@ -438,5 +438,52 @@ public class SQLiteOperation {
         cursor.close();
         db.close();
         return subjectid;
+    }
+
+    //根据班级查老师id
+    public static int[] queryTeacherByClassId(Context context,int cid){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select * from teach,teacher where cid=? and teach.tid=teacher.tid",new String[]{cid+""});
+
+        int[] tids=new int[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            cursor.moveToNext();
+            tids[i]=cursor.getInt(cursor.getColumnIndex("tid"));
+        }
+
+        cursor.close();
+        db.close();
+        return tids;
+    }
+    //根据学生uname查学生所在班级id
+    public static int queryClassIdByUname(Context context,String uname){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select cid from student where uname=?",new String[]{uname});
+        cursor.moveToNext();
+        int cid=cursor.getInt(cursor.getColumnIndex("cid"));
+        cursor.close();
+        db.close();
+        return cid;
+    }
+
+    //通过学生id,老师id查询缺勤次数
+    public static int queryTimesByStudentIdAndTeacherId(Context context,int studentId,int teacherId){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select * from attendance where sid=? and tid=?",new String[]{studentId+"",teacherId+""});
+        cursor.moveToNext();
+        int times=cursor.getCount();
+        cursor.close();
+        db.close();
+        return times;
+    }
+    //通过学生uname查找学生id
+    public static int queryStudetIdByUname(Context context,String uname){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select sid from student where uname=?",new String[]{uname});
+        cursor.moveToNext();
+        int sid=cursor.getInt(cursor.getColumnIndex("sid"));
+        cursor.close();
+        db.close();
+        return sid;
     }
 }
