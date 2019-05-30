@@ -1,10 +1,12 @@
 package com.example.pocketclass.studentOperation;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import com.example.pocketclass.R;
 import com.example.pocketclass.StudentActivity;
 import com.sql.SQLiteOperation;
@@ -22,19 +24,6 @@ public class QuerryAttendance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_querry_attendance);
 
-        if(StudentActivity.classid==0){
-            Intent intent=new Intent(QuerryAttendance.this,StudentActivity.class);
-            Toast.makeText(QuerryAttendance.this,"请输入班级信息",Toast.LENGTH_SHORT);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Bundle bundle = new Bundle();
-            bundle.putString("uname",StudentActivity.uname);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
 
         teacherSpinner=(Spinner)findViewById(R.id.teacher);
         timesText =(TextView)findViewById(R.id.times);

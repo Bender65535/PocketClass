@@ -133,7 +133,7 @@ public class TeacherInformationUpdate extends AppCompatActivity {
                 if (subjectSpinner.getSelectedItem() != null)
                     subjectid =SQLiteOperation.querySubjectIdBySubjectName(getBaseContext(),subjectSpinner.getSelectedItem().toString());
                 else
-                    subjectid=1;
+                    subjectid=0;
 
                 born = ed_date.getText().toString();
                 email = ed_email.getText().toString();
