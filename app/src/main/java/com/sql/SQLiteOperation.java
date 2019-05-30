@@ -163,6 +163,8 @@ public class SQLiteOperation {
         SQLiteDatabase db = getDataBase(context);
         int count = db.delete("student", "sid=?", new String[]{id+""});
 
+        //删除学生账号
+        deleteUserByStudentid(context,id);
         //删除学生id所在出勤表
         deleteStudentIdInAttendance(context,id);
         //删除学生id所在作业成绩表
@@ -171,6 +173,18 @@ public class SQLiteOperation {
         deleteStudentIdInAppraise(context,id);
 
         db.close();
+        return count;
+    }
+
+    //通过学生id删除学生账号
+    public static int deleteUserByStudentid(Context context,int id){
+        SQLiteDatabase db = getDataBase(context);
+
+        //通过学生id得到学生username
+        String uname= queryUnameByStudentId(context,id);
+
+        int count = db.delete("user", "uname=?", new String[]{uname});
+
         return count;
     }
 
@@ -200,6 +214,9 @@ public class SQLiteOperation {
         SQLiteDatabase db = getDataBase(context);
         int count = db.delete("teacher", "tid=?", new String[]{id+""});
 
+        //删除老师账号
+        deleteUserByTeacherId(context,id);
+
         //删除老师id所在出勤表
         deleteTeacherIdInAttendance(context,id);
         //删除老师id所在作业成绩表
@@ -208,6 +225,17 @@ public class SQLiteOperation {
         deleteTeacherIdInAppraise(context,id);
 
         db.close();
+        return count;
+    }
+    //根据老师id删除老师账号
+    public static int deleteUserByTeacherId(Context context,int id){
+        SQLiteDatabase db = getDataBase(context);
+
+        //通过学生id得到学生username
+        String uname= queryuUnameByTeacherId(context,id);
+
+        int count = db.delete("user", "uname=?", new String[]{uname});
+
         return count;
     }
     //删除老师id所在出勤表
@@ -467,6 +495,9 @@ public class SQLiteOperation {
     //用班级id查找班名
     public static String queryClassNameByClassId(Context context,int classid){
         SQLiteDatabase db = getDataBase(context);
+        if(classid==0){
+            return " ";
+        }
         Cursor cursor=db.rawQuery("select classname from class where classid=?",new String[]{classid+""});
         cursor.moveToNext();
         String className=cursor.getString(cursor.getColumnIndex("classname"));
@@ -530,6 +561,8 @@ public class SQLiteOperation {
     public static int queryClassIdByUname(Context context,String uname){
         SQLiteDatabase db = getDataBase(context);
         Cursor cursor=db.rawQuery("select classid from student where uname=?",new String[]{uname});
+        if(cursor.getCount()==0)
+            return 0;
         cursor.moveToNext();
         int classid=cursor.getInt(cursor.getColumnIndex("classid"));
         cursor.close();
@@ -640,5 +673,27 @@ public class SQLiteOperation {
             return false;
         }
 
+    }
+    //通过学生id找到学生账号
+    public static String queryUnameByStudentId(Context context, int id){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select uname from student where sid=? ",new String[]{id+""});
+
+        cursor.moveToNext();
+        String uname=cursor.getString(cursor.getColumnIndex("uname"));
+        cursor.close();
+        db.close();
+        return uname;
+    }
+    //通过老师id找到老师账号
+    public static String queryuUnameByTeacherId(Context context, int id){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select uname from teacher where tid=? ",new String[]{id+""});
+
+        cursor.moveToNext();
+        String uname=cursor.getString(cursor.getColumnIndex("uname"));
+        cursor.close();
+        db.close();
+        return uname;
     }
 }

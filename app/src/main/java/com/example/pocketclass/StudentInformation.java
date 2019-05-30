@@ -72,15 +72,15 @@ public class StudentInformation extends Fragment {
             image = student.getImage();
 
         tx_name.setText("姓名: " + name);
-        if(classid==0)
+        if (classid == 0)
             tx_classid.setText("班级: ");
         else
-            tx_classid.setText("班级: "+SQLiteOperation.queryClassNameByClassId(StudentActivity.context,classid));
-        tx_sex.setText("性别: "+sex);
-        tx_date.setText("出生日期: "+born);
-        tx_address.setText("地区: "+area);
-        tx_phone.setText("电话号码: "+phone);
-        tx_email.setText("邮箱: "+email);
+            tx_classid.setText("班级: " + SQLiteOperation.queryClassNameByClassId(StudentActivity.context, classid));
+        tx_sex.setText("性别: " + sex);
+        tx_date.setText("出生日期: " + born);
+        tx_address.setText("地区: " + area);
+        tx_phone.setText("电话号码: " + phone);
+        tx_email.setText("邮箱: " + email);
 
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         bt_pic.setImageBitmap(bitmap);

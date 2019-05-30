@@ -133,7 +133,7 @@ public class StudentInformationUpdate extends AppCompatActivity {
                     //根据名字查id
                     classid =SQLiteOperation.queryClassIdByClassName(getBaseContext(),classidSpinner.getSelectedItem().toString());
                 else
-                    classid=1;
+                    classid=0;
 
 
 
