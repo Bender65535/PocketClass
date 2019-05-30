@@ -126,6 +126,9 @@ public class SQLiteOperation {
         deleteTeachByClassid(context,classid);
         //将学生表的classid制为null
         updateStudentClassidToNull(context,classid);
+        //删除该班级的老师对学生的评价
+
+
         db.close();
         return count;
     }
@@ -144,6 +147,8 @@ public class SQLiteOperation {
         deleteHomeworkBySubjectId(context,subjectid);
         //将老师的科目制为空
         updateTeacherSubjectIdToNull(context,subjectid);
+        //删除该科目的老师对学生的评价
+
         db.close();
         return count;
     }

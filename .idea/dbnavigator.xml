@@ -43,21 +43,26 @@ update user set pwd=''  where uname='zt']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/teach" />
-      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/class" />
-      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/attendance" />
-      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/student" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="3a2a5940-dbbe-48b0-8853-9334735ce114" />
     <connection id="b2ddec4e-12fe-4525-8ded-2e375f91d98b" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.appraise" active-filter-id="b88f8a72-26fa-4bcd-b561-325e430e2361">
+      <filter id="b88f8a72-26fa-4bcd-b561-325e430e2361" name="0" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="aid" operator="&gt;=" value="0" active="true" />
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.student" active-filter-id="f78ed31e-8a0e-40f9-a4b2-4c7006d96e1f">
       <filter id="f78ed31e-8a0e-40f9-a4b2-4c7006d96e1f" name="0" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="sid" operator="&gt;=" value="0" active="true" />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.homework" active-filter-id="10570b5b-b18a-42bd-9a77-0ca38821d64c">
+      <filter id="10570b5b-b18a-42bd-9a77-0ca38821d64c" name="0" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="hid" operator="&gt;=" value="0" active="true" />
       </filter>
     </filter-actions>
     <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.class" active-filter-id="1f8f4d6e-9fb0-49f4-b61b-d9c6d5afca18">
@@ -125,7 +130,7 @@ update user set pwd=''  where uname='zt']]></console>
           <port value="" />
           <database value="" />
           <files>
-            <file path="C:\AuI18N\pocket_class" schema="main" />
+            <file path="C:\360安全浏览器下载\pocket_class" schema="main" />
           </files>
           <os-authentication value="false" />
           <empty-authentication value="false" />
