@@ -56,6 +56,8 @@ public class TeacherInformationUpdate extends AppCompatActivity {
 
     private ArrayAdapter<String> subjectAdapt;
 
+    public static String uname=TeacherActivity.uname;
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -142,8 +144,6 @@ public class TeacherInformationUpdate extends AppCompatActivity {
                 area = provinceString + "," + cityString + "," + areaString;
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                image = baos.toByteArray();
 
                 ContentValues values = new ContentValues();
                 values.put("name", name);
@@ -152,13 +152,23 @@ public class TeacherInformationUpdate extends AppCompatActivity {
                 values.put("email", email);
                 values.put("phone", phone);
                 values.put("area", area);
-                values.put("image", image);
-                values.put("subjectname", subjectid);
 
-                SQLiteOperation.updateTeacher(TeacherActivity.context, values, "uname=?", new String[]{TeacherActivity.uname});
+                if(bitmap!=null){
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                    image = baos.toByteArray();
+                    values.put("image", image);
+                }
 
+                values.put("subjectid", subjectid);
+
+                SQLiteOperation.updateTeacher(TeacherActivity.context, values, "uname=?", new String[]{uname});
 
                 Intent intent = new Intent(TeacherInformationUpdate.this, TeacherActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("uname", uname);
+
+                intent.putExtras(bundle);
 
                 startActivity(intent);
             }

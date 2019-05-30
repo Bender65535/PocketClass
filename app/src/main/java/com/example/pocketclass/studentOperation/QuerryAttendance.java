@@ -30,6 +30,9 @@ public class QuerryAttendance extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            Bundle bundle = new Bundle();
+            bundle.putString("uname",StudentActivity.uname);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
 
@@ -52,9 +55,9 @@ public class QuerryAttendance extends AppCompatActivity {
                 int times=SQLiteOperation.queryTimesByStudentIdAndTeacherId(getBaseContext(),StudentActivity.studentid,tid);
 
                 //返回缺勤次数
-                timesText.setText(times);
+                timesText.setText(times+"");
                 //出勤分=100-10*times
-                scoreText.setText(100-10*times);
+                scoreText.setText((100-10*times)+"");
             }
 
             @Override

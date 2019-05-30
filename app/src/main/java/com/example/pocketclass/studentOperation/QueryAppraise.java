@@ -30,11 +30,15 @@ public class QueryAppraise extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            Bundle bundle = new Bundle();
+            bundle.putString("uname",StudentActivity.uname);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
 
         teacherSpinner=(Spinner)findViewById(R.id.teacher);
-        wordsText =(TextView)findViewById(R.id.times);
+        wordsText =(TextView)findViewById(R.id.words);
         scoreText =(TextView)findViewById(R.id.score);
 
         setSpinner();
@@ -51,7 +55,7 @@ public class QueryAppraise extends AppCompatActivity {
                 int score=SQLiteOperation.queryClassScoreByStudentIdAndTeacherId(getBaseContext(),StudentActivity.studentid,tid);
 
                 wordsText.setText(words);
-                scoreText.setText(score);
+                scoreText.setText(score+"");
             }
 
             @Override

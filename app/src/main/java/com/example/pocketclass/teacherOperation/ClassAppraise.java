@@ -47,7 +47,7 @@ public class ClassAppraise extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder=new AlertDialog.Builder(ClassAppraise.this);
                 builder.setTitle("提示")
-                        .setMessage("确认删除?")
+                        .setMessage("确认提交?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -63,16 +63,19 @@ public class ClassAppraise extends AppCompatActivity {
                                 long result =SQLiteOperation.addAppraise(getBaseContext(), teacherid,studentid, words, score);
 
                                 if(result>0){
-                                    Toast.makeText(ClassAppraise.this,"删除成功",Toast.LENGTH_SHORT);
+                                    Toast.makeText(ClassAppraise.this,"评价成功",Toast.LENGTH_SHORT);
                                     try {
                                         Thread.sleep(500);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
                                     Intent intent=new Intent(ClassAppraise.this, TeacherActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("uname", TeacherActivity.uname);
+                                    intent.putExtras(bundle);
                                     startActivity(intent);
                                 }else {
-                                    Toast.makeText(ClassAppraise.this,"删除失败",Toast.LENGTH_SHORT);
+                                    Toast.makeText(ClassAppraise.this,"评价失败",Toast.LENGTH_SHORT);
 
                                 }
                             }
@@ -115,7 +118,7 @@ public class ClassAppraise extends AppCompatActivity {
                 String[] studentIdString=new String[studentId.length];
                 for(int i=0;i<studentId.length;i++){
                     String name=SQLiteOperation.queryStudentNameById(getBaseContext(),studentId[i]);
-                    studentIdString[i]=studentId+" "+name;
+                    studentIdString[i]=studentId[i]+" "+name;
                 }
                 //适配学生
                 studentAdapt=new ArrayAdapter(ClassAppraise.this,R.layout.support_simple_spinner_dropdown_item,studentIdString);

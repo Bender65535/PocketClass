@@ -27,6 +27,10 @@ public class CalculateDatetimeScore extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            Bundle bundle = new Bundle();
+            bundle.putString("uname",StudentActivity.uname);
+            intent.putExtras(bundle);
+
             startActivity(intent);
         }
 

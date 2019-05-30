@@ -73,7 +73,7 @@ public class SQLiteOperation {
         SQLiteDatabase db = getDataBase(context);
         ContentValues values = new ContentValues();
         values.put("classid",classid);
-        values.put("teacherid",teacherid);
+        values.put("tid",teacherid);
         long result=db.insert("teach",null,values);
         db.close();
         return result;
@@ -141,7 +141,7 @@ public class SQLiteOperation {
         SQLiteDatabase db = getDataBase(context);
         int count = db.delete("subject", "subjectid=?", new String[]{subjectid+""});
         //删除所有该科目id的作业表
-
+        deleteHomeworkBySubjectId(context,subjectid);
         //将老师的科目制为空
         updateTeacherSubjectIdToNull(context,subjectid);
         db.close();
@@ -485,8 +485,6 @@ public class SQLiteOperation {
     public static int[] queryAllStudentIdByClassName(Context context,String className){
         SQLiteDatabase db = getDataBase(context);
         Cursor cursor=db.rawQuery("select sid from student,class where student.classid=class.classid and classname=?",new String[]{className});
-        cursor.moveToNext();
-        int classId=cursor.getInt(cursor.getColumnIndex("sid"));
         int[] studentId=new int[cursor.getCount()];
         for(int i=0;i<cursor.getCount();i++){
             cursor.moveToNext();
@@ -526,9 +524,9 @@ public class SQLiteOperation {
     //根据学生uname查学生所在班级id
     public static int queryClassIdByUname(Context context,String uname){
         SQLiteDatabase db = getDataBase(context);
-        Cursor cursor=db.rawQuery("select sid from student where uname=?",new String[]{uname});
+        Cursor cursor=db.rawQuery("select classid from student where uname=?",new String[]{uname});
         cursor.moveToNext();
-        int classid=cursor.getInt(cursor.getColumnIndex("sid"));
+        int classid=cursor.getInt(cursor.getColumnIndex("classid"));
         cursor.close();
         db.close();
         return classid;
@@ -607,16 +605,17 @@ public class SQLiteOperation {
     //查询班名是否重复
     public static boolean isClassNameExit(Context context,String className){
         SQLiteDatabase db = getDataBase(context);
-        Cursor cursor=db.rawQuery("select classname from class where class=? ",new String[]{className});
-        cursor.moveToNext();
-        int result=cursor.getInt(cursor.getColumnIndex("classname"));
-        cursor.close();
-        db.close();
+        Cursor cursor=db.rawQuery("select classname from class where classname=? ",new String[]{className});
+
         if(cursor.getCount()>0) {
-            return false;
+            cursor.close();
+            db.close();
+            return true;
         }
         else {
-            return true;
+            cursor.close();
+            db.close();
+            return false;
         }
 
     }
@@ -624,15 +623,17 @@ public class SQLiteOperation {
     public static boolean isSubjectNameExit(Context context,String subjectName){
         SQLiteDatabase db = getDataBase(context);
         Cursor cursor=db.rawQuery("select subjectname from subject where subjectname=? ",new String[]{subjectName});
-        cursor.moveToNext();
-        cursor.getInt(cursor.getColumnIndex("subjectname"));
-        cursor.close();
-        db.close();
+
         if(cursor.getCount()>0) {
-            return false;
-        }
-        else {
+            cursor.close();
+            db.close();
             return true;
         }
+        else {
+            cursor.close();
+            db.close();
+            return false;
+        }
+
     }
 }

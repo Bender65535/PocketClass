@@ -57,6 +57,8 @@ public class StudentInformationUpdate extends AppCompatActivity {
 
     private ArrayAdapter<String> classidAdapt;
 
+    public static String uname=StudentActivity.uname;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -159,10 +161,13 @@ public class StudentInformationUpdate extends AppCompatActivity {
                 }
                 values.put("classid", classid);
 
-                SQLiteOperation.updateStudent(StudentActivity.context, values, "uname=?", new String[]{StudentActivity.uname});
+                SQLiteOperation.updateStudent(StudentActivity.context, values, "uname=?", new String[]{uname});
 
+                Intent intent = new Intent(StudentInformationUpdate.this, StudentActivity.class);
 
-                Intent intent = new Intent(StudentInformationUpdate.this, StudentInformation.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("uname",uname);
+                intent.putExtras(bundle);
 
                 startActivity(intent);
             }

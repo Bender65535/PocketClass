@@ -43,8 +43,12 @@ public class DeleteSubjectActivity extends AppCompatActivity {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String subjectid= subjectSpinner.getSelectedItem().toString();
-                                int result =SQLiteOperation.deleteSubject(getBaseContext(),Integer.parseInt(subjectid));
+                                String subjectName= subjectSpinner.getSelectedItem().toString();
+
+                                //根据科目名找科目id
+                                int subjectId=SQLiteOperation.querySubjectIdBySubjectName(getBaseContext(),subjectName);
+
+                                int result =SQLiteOperation.deleteSubject(getBaseContext(),subjectId);
                                 if(result>0){
                                     Toast.makeText(DeleteSubjectActivity.this,"删除成功",Toast.LENGTH_SHORT);
                                     try {

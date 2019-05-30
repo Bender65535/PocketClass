@@ -28,6 +28,10 @@ public class QueryHomeWork extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            Bundle bundle = new Bundle();
+            bundle.putString("uname",StudentActivity.uname);
+            intent.putExtras(bundle);
+
             startActivity(intent);
         }
 
@@ -45,7 +49,7 @@ public class QueryHomeWork extends AppCompatActivity {
                 //查询老师所给作业分数
                 int score=SQLiteOperation.queryHomeworkScoreByStudentIdAndTeacherId(getBaseContext(),StudentActivity.studentid,tid);
 
-                scoreText.setText(score);
+                scoreText.setText(score+"");
             }
 
             @Override

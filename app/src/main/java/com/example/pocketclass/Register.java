@@ -62,7 +62,7 @@ public class Register extends AppCompatActivity {
                 long unameResult=SQLiteOperation.addUser(getBaseContext(),uname,pwd,position);
 
                 if(unameResult>0){
-                    //录入到教室或学生表中
+                    //录入到教师或学生表中
                     if(rb_student.isChecked()){
                         SQLiteOperation.addStudent(getBaseContext(),uname);
                     }else if(rb_teacher.isChecked()){

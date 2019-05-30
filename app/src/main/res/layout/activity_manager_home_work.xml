@@ -50,7 +50,7 @@
                 android:textSize="30dp"
         />
         <Spinner
-                android:id="@+id/attend_percent"
+                android:id="@+id/student"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
         />

@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
                 //跳到管理员界面
                 if ("admin".equals(uname)&&"123".equals(pwd)) {
+                    if(save.isChecked()){
+                        Utils.saveUserInfo(MainActivity.this,uname,pwd);
+                    }
                     Intent intent = new Intent(MainActivity.this, Manager.class);
                     startActivity(intent);
                     return;

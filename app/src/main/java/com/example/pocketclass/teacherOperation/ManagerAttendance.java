@@ -40,7 +40,7 @@ public class ManagerAttendance extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder=new AlertDialog.Builder(ManagerAttendance.this);
                 builder.setTitle("提示")
-                        .setMessage("确认删除?")
+                        .setMessage("确认缺勤?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -53,16 +53,20 @@ public class ManagerAttendance extends AppCompatActivity {
                                 long result =SQLiteOperation.addAttendance(getBaseContext(), teacherid,studentid);
 
                                 if(result>0){
-                                    Toast.makeText(ManagerAttendance.this,"删除成功",Toast.LENGTH_SHORT);
+                                    Toast.makeText(ManagerAttendance.this,"添加成功",Toast.LENGTH_SHORT);
                                     try {
                                         Thread.sleep(500);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
                                     Intent intent=new Intent(ManagerAttendance.this, TeacherActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("uname", TeacherActivity.uname);
+                                    intent.putExtras(bundle);
+
                                     startActivity(intent);
                                 }else {
-                                    Toast.makeText(ManagerAttendance.this,"删除失败",Toast.LENGTH_SHORT);
+                                    Toast.makeText(ManagerAttendance.this,"添加失败",Toast.LENGTH_SHORT);
 
                                 }
                             }
@@ -104,7 +108,7 @@ public class ManagerAttendance extends AppCompatActivity {
                 String[] studentIdString=new String[studentId.length];
                 for(int i=0;i<studentId.length;i++){
                     String name=SQLiteOperation.queryStudentNameById(getBaseContext(),studentId[i]);
-                    studentIdString[i]=studentId+" "+name;
+                    studentIdString[i]=studentId[i]+" "+name;
                 }
                 //适配学生
                 studentAdapt=new ArrayAdapter(ManagerAttendance.this,R.layout.support_simple_spinner_dropdown_item,studentIdString);

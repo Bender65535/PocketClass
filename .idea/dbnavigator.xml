@@ -25,25 +25,30 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114">
-        <schema name="main" object-types="view, table" />
+        <schema name="main" object-types="index, view, constraint, table, dataset trigger, column" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="3a2a5940-dbbe-48b0-8853-9334735ce114">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">select count(*) from student
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select count(*) from student
 select * from class
 select * from user
 select * from teach inner join teacher on teach.tid=teacher.tid
 select * from teach,teacher where classid=0 and teach.tid=teacher.tid
-update user set pwd=''  where uname='zt'</console>
+update user set pwd=''  where uname='zt']]></console>
     </connection>
     <connection id="b2ddec4e-12fe-4525-8ded-2e375f91d98b">
       <console name="Connection 1" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/teach" />
+      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/class" />
+      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/attendance" />
+      <object connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" object-ref="schemas/main/tables/student" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="3a2a5940-dbbe-48b0-8853-9334735ce114" />
@@ -60,9 +65,19 @@ update user set pwd=''  where uname='zt'</console>
         <condition column="classid" operator="&gt;=" value="1" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.subject" active-filter-id="3b121ce2-1cd2-4088-b675-5cbace11da95">
+      <filter id="3b121ce2-1cd2-4088-b675-5cbace11da95" name="0" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="subjectid" operator="&gt;=" value="0" active="true" />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.attendance" active-filter-id="e3ec1b4f-4d7d-42ef-b62e-75fe769173f3">
+      <filter id="e3ec1b4f-4d7d-42ef-b62e-75fe769173f3" name="0" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="attendid" operator="&gt;=" value="0" active="true" />
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.teacher" active-filter-id="1b4381bb-340a-4cca-ae09-3704234d7845">
       <filter id="1b4381bb-340a-4cca-ae09-3704234d7845" name="0" temporary="false" custom-name="false" type="basic" join-type="AND">
-        <condition column="tid" operator="=" value="0" active="true" />
+        <condition column="tid" operator="&gt;=" value="0" active="true" />
       </filter>
     </filter-actions>
     <filter-actions connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114" dataset="main.user" active-filter-id="" />
@@ -110,7 +125,7 @@ update user set pwd=''  where uname='zt'</console>
           <port value="" />
           <database value="" />
           <files>
-            <file path="C:\360安全浏览器下载\pocket_class" schema="main" />
+            <file path="C:\AuI18N\pocket_class" schema="main" />
           </files>
           <os-authentication value="false" />
           <empty-authentication value="false" />

@@ -43,7 +43,7 @@ public class ManagerHomeWork extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder=new AlertDialog.Builder(ManagerHomeWork.this);
                 builder.setTitle("提示")
-                        .setMessage("确认删除?")
+                        .setMessage("确定提交?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -59,16 +59,19 @@ public class ManagerHomeWork extends AppCompatActivity {
                                 long result =SQLiteOperation.addHomework(getBaseContext(), teacherid,studentid,score);
 
                                 if(result>0){
-                                    Toast.makeText(ManagerHomeWork.this,"删除成功",Toast.LENGTH_SHORT);
+                                    Toast.makeText(ManagerHomeWork.this,"提交成功",Toast.LENGTH_SHORT);
                                     try {
                                         Thread.sleep(500);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
                                     Intent intent=new Intent(ManagerHomeWork.this, TeacherActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("uname", TeacherActivity.uname);
+                                    intent.putExtras(bundle);
                                     startActivity(intent);
                                 }else {
-                                    Toast.makeText(ManagerHomeWork.this,"删除失败",Toast.LENGTH_SHORT);
+                                    Toast.makeText(ManagerHomeWork.this,"提交失败",Toast.LENGTH_SHORT);
 
                                 }
                             }
@@ -110,7 +113,7 @@ public class ManagerHomeWork extends AppCompatActivity {
                 String[] studentIdString=new String[studentId.length];
                 for(int i=0;i<studentId.length;i++){
                     String name=SQLiteOperation.queryStudentNameById(getBaseContext(),studentId[i]);
-                    studentIdString[i]=studentId+" "+name;
+                    studentIdString[i]=studentId[i]+" "+name;
                 }
                 //适配学生
                 studentAdapt=new ArrayAdapter(ManagerHomeWork.this,R.layout.support_simple_spinner_dropdown_item,studentIdString);
