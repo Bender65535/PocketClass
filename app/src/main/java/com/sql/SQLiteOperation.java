@@ -246,7 +246,7 @@ public class SQLiteOperation {
         SQLiteDatabase db = getDataBase(context);
         ContentValues values=new ContentValues();
         values.put("classid","");
-        db.update("student", values, "classid", new String[]{classid+""});
+        db.update("student", values, "classid=?", new String[]{classid+""});
         db.close();
     }
 
@@ -255,7 +255,7 @@ public class SQLiteOperation {
         SQLiteDatabase db = getDataBase(context);
         ContentValues values=new ContentValues();
         values.put("subjectid","");
-        db.update("subject", values, "subjectid", new String[]{subjectid+""});
+        db.update("subject", values, "subjectid=?", new String[]{subjectid+""});
         db.close();
     }
     /**
@@ -593,5 +593,46 @@ public class SQLiteOperation {
         cursor.close();
         db.close();
         return score;
+    }
+    //根据科目id查找科目名
+    public static int querySubjectIdByName(Context context,String subjectname){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select subjectid from subject where subjectname=? ",new String[]{subjectname});
+        cursor.moveToNext();
+        int subjectid=cursor.getInt(cursor.getColumnIndex("subjectid"));
+        cursor.close();
+        db.close();
+        return subjectid;
+    }
+    //查询班名是否重复
+    public static boolean isClassNameExit(Context context,String className){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select classname from class where class=? ",new String[]{className});
+        cursor.moveToNext();
+        int result=cursor.getInt(cursor.getColumnIndex("classname"));
+        cursor.close();
+        db.close();
+        if(cursor.getCount()>0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+    //查询科目名是否重复
+    public static boolean isSubjectNameExit(Context context,String subjectName){
+        SQLiteDatabase db = getDataBase(context);
+        Cursor cursor=db.rawQuery("select subjectname from subject where subjectname=? ",new String[]{subjectName});
+        cursor.moveToNext();
+        cursor.getInt(cursor.getColumnIndex("subjectname"));
+        cursor.close();
+        db.close();
+        if(cursor.getCount()>0) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

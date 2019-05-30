@@ -29,6 +29,11 @@ public class AddSubjectActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String subjectName=ed.getText().toString();
 
+                if(SQLiteOperation.isSubjectNameExit(getBaseContext(),subjectName)){
+                    Toast.makeText(AddSubjectActivity.this,"该科目已存在,请重新输入",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 long result=SQLiteOperation.addSubject(getBaseContext(),subjectName);
                 if(result>0){
                     Toast.makeText(AddSubjectActivity.this,"添加成功",Toast.LENGTH_SHORT).show();

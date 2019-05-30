@@ -25,18 +25,18 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="3a2a5940-dbbe-48b0-8853-9334735ce114">
-        <schema name="main" object-types="index, column, dataset trigger, table, constraint, view" />
+        <schema name="main" object-types="view, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="3a2a5940-dbbe-48b0-8853-9334735ce114">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select count(*) from student
+      <console name="Connection" type="STANDARD" schema="main" session="Main">select count(*) from student
 select * from class
 select * from user
 select * from teach inner join teacher on teach.tid=teacher.tid
 select * from teach,teacher where classid=0 and teach.tid=teacher.tid
-update user set pwd=''  where uname='zt']]></console>
+update user set pwd=''  where uname='zt'</console>
     </connection>
     <connection id="b2ddec4e-12fe-4525-8ded-2e375f91d98b">
       <console name="Connection 1" type="STANDARD" schema="" session="Main" />

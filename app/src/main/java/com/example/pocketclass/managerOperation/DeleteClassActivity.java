@@ -42,8 +42,10 @@ public class DeleteClassActivity extends AppCompatActivity {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String classid=classSpinner.getSelectedItem().toString();
-                                int result =SQLiteOperation.deleteClass(getBaseContext(),Integer.parseInt(classid));
+                                String className=classSpinner.getSelectedItem().toString();
+
+                                int classid=SQLiteOperation.queryClassIdByClassName(getBaseContext(),className);
+                                int result =SQLiteOperation.deleteClass(getBaseContext(),classid);
 
                                 if(result>0){
                                     Toast.makeText(DeleteClassActivity.this,"删除成功",Toast.LENGTH_SHORT);

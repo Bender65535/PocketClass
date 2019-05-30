@@ -29,7 +29,10 @@ public class AddClassActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String className=ed.getText().toString();
-
+                if(SQLiteOperation.isClassNameExit(getBaseContext(),className)){
+                    Toast.makeText(AddClassActivity.this,"该班名已存在,请重新输入",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 long result=SQLiteOperation.addClass(getBaseContext(),className);
                 if(result>0){
                     Toast.makeText(AddClassActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
