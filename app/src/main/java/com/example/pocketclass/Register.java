@@ -53,7 +53,7 @@ public class Register extends AppCompatActivity {
                 }
 
                 //判断账号是否重复
-                boolean result = SQLiteOperation.isAccountExit(getBaseContext(),uname);
+                boolean result = SQLiteOperation.isAccountExist(getBaseContext(),uname);
                 if(result){
                     Toast.makeText(Register.this, "账号重复,请重新输入", Toast.LENGTH_SHORT).show();
                     return;

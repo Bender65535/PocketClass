@@ -306,7 +306,7 @@ public class SQLiteOperation {
     }
 
     //查询账号是否存在
-    public static boolean isAccountExit(Context context, String uname) {
+    public static boolean isAccountExist(Context context, String uname) {
         SQLiteDatabase db = getDataBase(context);
         Cursor cursor = db.rawQuery("select uname from user where uname=?", new String[]{uname});
         boolean result = cursor.moveToNext();
@@ -641,7 +641,7 @@ public class SQLiteOperation {
         return subjectid;
     }
     //查询班名是否重复
-    public static boolean isClassNameExit(Context context,String className){
+    public static boolean isClassNameExist(Context context, String className){
         SQLiteDatabase db = getDataBase(context);
         Cursor cursor=db.rawQuery("select classname from class where classname=? ",new String[]{className});
 
@@ -658,7 +658,7 @@ public class SQLiteOperation {
 
     }
     //查询科目名是否重复
-    public static boolean isSubjectNameExit(Context context,String subjectName){
+    public static boolean isSubjectNameExist(Context context, String subjectName){
         SQLiteDatabase db = getDataBase(context);
         Cursor cursor=db.rawQuery("select subjectname from subject where subjectname=? ",new String[]{subjectName});
 
